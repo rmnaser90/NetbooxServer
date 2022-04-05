@@ -1,13 +1,12 @@
-import { writeFile } from "fs";
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 const env = dotenv.config();
 const app: Express = express();
-import * as userApi from './server/routes/userApi'
+import userApi from "./server/routes/userApi";
+
 
 app.use(express.json());
-
-app.use('/user',userApi.default)
+app.use("/user", userApi.router);
 
 const { PORT } = process.env;
 app.listen(PORT, function () {
