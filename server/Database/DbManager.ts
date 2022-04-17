@@ -16,7 +16,7 @@ class DbManager {
       const isAuthenticated = bcrypt.compareSync(password, hash);
       
       if (!isAuthenticated) return Errors.WRONG_PASSWORD;
-      user.set("isLoggedIn", "TRUE");
+      user.set("isLoggedIn", true);
       await user.save();
       return { err: false, user };
 
