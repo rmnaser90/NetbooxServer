@@ -1,5 +1,5 @@
-import { Sequelize, DataTypes } from "sequelize";
-import sequelize from "./config";
+import { DataTypes } from "sequelize";
+import sequelize from "../config";
 
 const Book = sequelize.define("books", {
   id: {

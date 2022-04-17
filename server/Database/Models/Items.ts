@@ -1,9 +1,9 @@
-import { Sequelize, DataTypes, Model, BuildOptions } from "sequelize";
-import sequelize from "./config";
+import { DataTypes, Model, BuildOptions } from "sequelize";
+import sequelize from "../config";
 import bcrypt from "bcryptjs";
 
-export interface UserAttributes {
-  id?: number;
+export interface TestModel extends Model {
+  readonly id?: number;
   fullName?: string;
   email?: string;
   password?: string;
@@ -13,7 +13,11 @@ export interface UserAttributes {
   updatedAt?: Date;
 }
 
-const User = sequelize.define("users", {
+export type UserStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): TestModel;
+};
+
+const User = <UserStatic>sequelize.define("users", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
