@@ -3,7 +3,7 @@ import User from "../../../Database/Models/User";
 import Errors from "../../../Errors/Errors";
 const concatUrl: (path: string) => string = function (path) {
   const PORT = process.env.PORT || 3003;
-  const BASE_URL = `http://localhost:${PORT}/`;
+  const BASE_URL = `http://localhost:${PORT}/api/v1/`;
   return BASE_URL + path;
 };
 describe("testing user actions API", () => {
