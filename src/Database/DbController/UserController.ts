@@ -48,6 +48,7 @@ class DbManager {
       return { ...Errors.BAD_REQUEST, error: errors };
     }
   }
+
 }
 
 export default DbManager;

@@ -24,8 +24,8 @@ router.post(
 
 router.put("/signIn", async function (req: Request, res: Response) {
   const { email, password } = req.body;
-  console.log(email,password);
-  
+  console.log(email, password);
+
   try {
     const dbRes = await dbManager.signInByEmail(email, password);
     if (dbRes.err) {
@@ -38,18 +38,25 @@ router.put("/signIn", async function (req: Request, res: Response) {
     res.status(401).send({ ...Errors.BAD_REQUEST, error });
   }
 });
-router.put('/signOut',auth,async (req:Request2,res:Response) => {
+router.put("/signOut", auth, async (req: Request2, res: Response) => {
   try {
-    const user = req.user
+    const user = req.user;
     if (user) {
-      const dbRes = await user.update("isLoggedIn",false)
-      res.send({message:" logged out succesfully"})
+      user.set("isLoggedIn", false);
+      await user.save();
+      res.send({ message: " logged out succesfully" });
     }
   } catch (error) {
     res.status(401).send({ ...Errors.BAD_REQUEST, error });
-  
   }
-  
-})
+});
 
+router.get("/authenticateUser", auth, function (req: Request2, res: Response) {
+  const user = req.user;
+  if (user) {
+    res.send({ err: false, user });
+    return;
+  }
+  res.end();
+});
 export default { router };
