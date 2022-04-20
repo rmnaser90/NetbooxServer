@@ -3,7 +3,7 @@ export default interface LocalBookType {
   subtitle?: string;
   text?: string;
   img?: string;
-  publishDate?: string;
+  publishedDate?: string;
   previewLink?: string;
   isbn10?: string | number;
   isbn13?: string | number;

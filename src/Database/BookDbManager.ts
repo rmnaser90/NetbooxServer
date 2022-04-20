@@ -1,8 +1,9 @@
 import { Op, Model } from "sequelize";
-import Book, { BookModel } from "./Models/Book";
-import Errors from "../Errors/Errors";
+import { BookModel } from "./Models/Book";
+import { Book } from "./index";
 import LocalBookType from "../Types/LocalBookType";
 import sequelize from "./config";
+import { UserModel } from "./Models/User";
 
 class BookController {
   async addBook(book: LocalBookType) {
@@ -13,25 +14,50 @@ class BookController {
       return error;
     }
   }
-  async addTofavorite(userId: string | number, bookISBN: string | number) {
+  async addBulkBook(books: any[]) {
     try {
-      const dbRes = await sequelize.query(`
-          INSERT INTO user_book (users_id,books_ISBN)
-          values("${userId}","${bookISBN}");
-          `);
-      return dbRes;
+      books.forEach((book) => this.addBook(book));
+      return { msg: "done" };
+    } catch (error) {
+      return error;
+    }
+  }
+  async addToShelf(user: UserModel, bookISBN: string | number) {
+    try {
+      const book = await Book.findOne({
+        where: {
+          isbn10: bookISBN,
+        },
+      });
+      if (book) {
+        await user.addBook(book);
+        return { message: "saved" };
+      }
     } catch (error) {
       return error;
     }
   }
 
-  async getUserBooks(userId: string | number) {
+  async getUserBooks(user: UserModel) {
     try {
-      const books = await sequelize.query(`
-        SELECT * FROM user_book,books
-        WHERE users_id = ${userId};
-        `);
+      const books = await user.getBooks();
       return books;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async deleteUserBook(user: UserModel, bookISBN: string | number) {
+    try {
+      const book = await Book.findOne({
+        where: {
+          isbn10: bookISBN,
+        },
+      });
+      if (book) {
+        const res = await user.removeBook(book);
+        return { message: "deleted",res };
+      }
     } catch (error) {
       return error;
     }

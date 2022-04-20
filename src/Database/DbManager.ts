@@ -1,5 +1,7 @@
 import { Op, Model } from "sequelize";
-import User, { UserModel } from "./Models/User";
+import { UserModel } from "./Models/User";
+import { User } from "./index";
+
 import bcrypt from "bcryptjs";
 import Errors from "../Errors/Errors";
 

@@ -1,24 +1,37 @@
 import sequelize from "./config";
-import User from "./Models/User";
-import Book from "./Models/Book";
+import bookInit from "./Models/Book";
+import userInit from "./Models/User";
 
-const inititializeSequelize = async ()=>{
+export const User = userInit(sequelize);
+export const Book = bookInit(sequelize);
 
-  User.belongsToMany(Book, {
-    through: "user_book",
-    as: "books",
-    foreignKey: "users_id",
+User.belongsToMany(Book, {
+  through: "user_book",
+});
+
+Book.belongsToMany(User, {
+  through: "user_book",
+});
+
+const test = async () => {
+  const user = await User.findOne({
+    where: {
+      id: 1,
+    },
   });
-  
-  Book.belongsToMany(User, {
-    through: "user_book",
-    as: "users",
-    foreignKey: "books_ISBN",
-  });
-  
-  await sequelize.sync({force:true}).catch((err) => {
+ if (user) {
+   const books = await user.getBooks()
+   console.log(books);
+   
+ }
+};
+
+const inititializeSequelize = async () => {
+  await sequelize.sync().catch((err) => {
     console.log(err);
   });
-return sequelize
-}
+
+
+  return sequelize;
+};
 export default inititializeSequelize;

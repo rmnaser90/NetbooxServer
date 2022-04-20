@@ -10,7 +10,7 @@ export interface VolumeInfo {
   title: string;
   subtitle?: string;
   authors: string[];
-  publishDate: string;
+  publishedDate: string;
   categories: string[];
   industryIdentifiers: Identifier[];
   pageCount: number;
