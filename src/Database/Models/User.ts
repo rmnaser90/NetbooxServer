@@ -8,7 +8,6 @@ import {
   HasManyRemoveAssociationMixin,
 } from "sequelize";
 import bcrypt from "bcryptjs";
-import { Book } from "../index";
 import { BookModel } from "./Book";
 
 export interface UserModel extends Model {

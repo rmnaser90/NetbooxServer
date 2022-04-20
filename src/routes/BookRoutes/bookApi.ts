@@ -1,7 +1,7 @@
 import express, { Router, Request, Response, NextFunction } from "express";
 import { Request2 } from "../../Authentication/auth";
 import GoogleAPI from "../../Integrations/GoogleBooks";
-import BookController from "../../Database/BookDbManager";
+import BookController from "../../Database/DbController/BookController";
 import Errors from "../../Errors/Errors";
 const googleApi = new GoogleAPI();
 const bookController = new BookController();

@@ -5,7 +5,7 @@ import router from "./src/routes";
 import inititializeSequelize from "./src/Database";
 const env = dotenv.config();
 const app: Express = express();
-inititializeSequelize()
+inititializeSequelize({force:false})
 
 app.use(express.json());
 app.use(cors());

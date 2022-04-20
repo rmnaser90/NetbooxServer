@@ -1,9 +1,9 @@
 import { Op, Model } from "sequelize";
-import { BookModel } from "./Models/Book";
-import { Book } from "./index";
-import LocalBookType from "../Types/LocalBookType";
-import sequelize from "./config";
-import { UserModel } from "./Models/User";
+import { BookModel } from "../Models/Book";
+import { Book } from "../index";
+import LocalBookType from "../../Types/LocalBookType";
+import sequelize from "../config";
+import { UserModel } from "../Models/User";
 
 class BookController {
   async addBook(book: LocalBookType) {

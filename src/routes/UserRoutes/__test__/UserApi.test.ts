@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import User from "../../../Database/Models/User";
+import {User} from "../../../Database/";
 import Errors from "../../../Errors/Errors";
 const concatUrl: (path: string) => string = function (path) {
   const PORT = process.env.PORT || 3003;
