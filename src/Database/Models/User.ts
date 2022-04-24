@@ -9,6 +9,7 @@ import {
 } from "sequelize";
 import bcrypt from "bcryptjs";
 import { BookModel } from "./Book";
+import { Book } from "../../Types/Types";
 
 export interface UserModel extends Model {
   readonly id?: number;
@@ -19,6 +20,7 @@ export interface UserModel extends Model {
   agreed?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  books?: BookModel[];
   getBooks: HasManyGetAssociationsMixin<BookModel>;
   addBook: HasManyAddAssociationMixin<BookModel, number>;
   removeBook: HasManyRemoveAssociationMixin<BookModel, number>;

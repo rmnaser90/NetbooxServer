@@ -1,6 +1,6 @@
 import { Op, Model } from "sequelize";
 import { UserModel } from "../Models/User";
-import { User,Book } from "../index";
+import { User, Book } from "../index";
 import { BookModel } from "../Models/Book";
 import bcrypt from "bcryptjs";
 import Errors from "../../Errors/Errors";
@@ -10,15 +10,19 @@ export const authenticateUser = function (user: UserModel, password: string) {
   const isAuthenticated = bcrypt.compareSync(password, hash);
   return isAuthenticated;
 };
+export const getUserInfo = (user: UserModel) => {
+  const { fullName, books, email, id } = user;
+  return { fullName, books, email, id };
+};
 
-class DbManager {
-  async signInByEmail(email: string, password: string) {
+class UserController {
+  async signInByEmail(userEmail: string, password: string) {
     try {
       const user = await User.findOne({
         where: {
-          email,
+          email: userEmail,
         },
-        include: [{model:Book}],
+        include: [{ model: Book }],
       });
       if (!user) return Errors.INVALID_EMAIL;
       const isAuthenticated = authenticateUser(user, password);
@@ -26,7 +30,9 @@ class DbManager {
       user.set("isLoggedIn", true);
       await user.save();
 
-      return { err: false, user };
+     
+
+      return { err: false, user: getUserInfo(user) };
     } catch ({ errors }) {
       return { ...Errors.BAD_REQUEST, error: errors };
     }
@@ -48,7 +54,6 @@ class DbManager {
       return { ...Errors.BAD_REQUEST, error: errors };
     }
   }
-
 }
 
-export default DbManager;
+export default UserController;

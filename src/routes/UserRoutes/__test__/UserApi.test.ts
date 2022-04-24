@@ -25,6 +25,7 @@ describe("testing user actions API", () => {
     fullName: "test",
     email: "doesntExist@jest.com",
   };
+
   it("should have status OK(200) and return user when sign up", async () => {
     const url = concatUrl("user/signUp");
     const response: AxiosResponse = await axios.post(url, MockUser);
@@ -60,7 +61,7 @@ describe("testing user actions API", () => {
     }
   );
   it(
-    "should throw error wrong password and msg: " + Errors.INVALID_EMAIL.msg,
+    "should throw error Invalid Email and msg: " + Errors.INVALID_EMAIL.msg,
     async () => {
       try {
         const response: AxiosResponse = await axios.put(
