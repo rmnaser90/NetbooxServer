@@ -9,7 +9,7 @@ import {
 } from "sequelize";
 import bcrypt from "bcryptjs";
 import { BookModel } from "./Book";
-import { Book } from "../../Types/Types";
+import { Book } from "..";
 
 export interface UserModel extends Model {
   readonly id?: number;
@@ -67,6 +67,7 @@ const userInit = function (sequelize: Sequelize) {
       type: DataTypes.STRING,
     },
   });
+
   return User;
 };
 export default userInit;

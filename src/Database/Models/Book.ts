@@ -1,5 +1,4 @@
 import { BuildOptions, DataTypes, Model, Sequelize } from "sequelize";
-import sequelize from "../config";
 export interface BookModel extends Model {
   title?: string;
   subtitle?: string;
@@ -19,7 +18,7 @@ export type BookStatic = typeof Model & {
 };
 const bookInit =  function (sequelize:Sequelize) {
   
-  const Book = sequelize.define<BookModel>("books", {
+  const Book = <BookStatic>sequelize.define("books", {
     googleId: {
       type: DataTypes.STRING,
       unique: true,

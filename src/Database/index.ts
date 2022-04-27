@@ -1,10 +1,11 @@
 import sequelize from "./config";
 import bookInit from "./Models/Book";
 import userInit from "./Models/User";
+import messageInit from "./Models/Messages";
 
 export const User = userInit(sequelize);
 export const Book = bookInit(sequelize);
-
+export const Message = messageInit(sequelize)
 User.belongsToMany(Book, {
   through: "user_book",
 });

@@ -1,9 +1,9 @@
 import { Op, Model } from "sequelize";
-import { BookModel } from "../Models/Book";
-import { Book } from "../index";
-import LocalBookType from "../../Types/LocalBookType";
-import sequelize from "../config";
-import { UserModel } from "../Models/User";
+import { BookModel } from "../Database/Models/Book";
+import { Book } from "../Database/index";
+import LocalBookType from "../Types/LocalBookType";
+import sequelize from "../Database/config";
+import { UserModel } from "../Database/Models/User";
 
 class BookController {
   async addBook(book: LocalBookType) {
@@ -16,8 +16,10 @@ class BookController {
   }
   async addBulkBook(books: any[]) {
     try {
-      books.forEach((book) => this.addBook(book));
-      return { msg: "done" };
+      const dbBooks = await Promise.all(
+        books.map((book) => this.addBook(book))
+      );
+      return { msg: "done", books: dbBooks };
     } catch (error) {
       return error;
     }
@@ -56,7 +58,7 @@ class BookController {
       });
       if (book) {
         const res = await user.removeBook(book);
-        return { message: "deleted",res };
+        return { message: "deleted", res };
       }
     } catch (error) {
       return error;

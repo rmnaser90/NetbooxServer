@@ -1,9 +1,9 @@
 import { Op, Model } from "sequelize";
-import { UserModel } from "../Models/User";
-import { User, Book } from "../index";
-import { BookModel } from "../Models/Book";
+import { UserModel } from "../Database/Models/User";
+import { User, Book } from "../Database/index";
+import { BookModel } from "../Database/Models/Book";
 import bcrypt from "bcryptjs";
-import Errors from "../../Errors/Errors";
+import Errors from "../Errors/Errors";
 
 export const authenticateUser = function (user: UserModel, password: string) {
   const hash = user.getDataValue("password");

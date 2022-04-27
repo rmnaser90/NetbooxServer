@@ -1,4 +1,4 @@
-export type Book = {
+export type BookType = {
     title?: string
     text?: string
     img?: string
@@ -15,13 +15,13 @@ export interface State {
     user: {
         fullName?: string
         email?: string
-        books?: Book[]
+        books?: BookType[]
         err?: boolean
         msg?: string
     }
     isLoogedIn: boolean
-    books: Book[]
-    searchBooks: Book[]
+    books: BookType[]
+    searchBooks: BookType[]
     forms: {
         login: {
             email?: string
@@ -35,7 +35,7 @@ export interface State {
 export interface User {
     fullName?: string
     email?: string
-    books?: Book[]
+    books?: BookType[]
     err?: boolean
     msg?: string
 }
@@ -43,8 +43,8 @@ export interface User {
 export interface Payload {
     user?: User
     isLoogedIn?: boolean
-    books?: Book[]
-    searchBooks?: Book[]
+    books?: BookType[]
+    searchBooks?: BookType[]
     inputHandler?: {
         form: 'login' | 'signUp'
         property: 'email' | 'password' | 'fullName' | 'confirmPassword'
@@ -86,3 +86,10 @@ export type BookQuery = {
     lccn?: string
     pclc?: string
 }
+export   interface ContactUsForm {
+    fullName?:string,
+    email?:string,
+    message?:string,
+    q?:string
+}
+

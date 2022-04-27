@@ -8,7 +8,6 @@ describe("testing cast Book To local function",  () => {
         const { data } = await axios.get('https://www.googleapis.com/books/v1/volumes?q=MICHIO');
         const googleBooks:GoogleBookType[] = data.items
         const localBooks:LocalBookType[] = googleBooks.map(book => castBookToLocal(book))
-        console.log(localBooks[0].isbn10);
         expect(localBooks[0]).toHaveProperty("googleId")
         expect(localBooks[1]).toHaveProperty("isbn10")
     });

@@ -2,11 +2,11 @@ import { Response, Request, NextFunction } from "express";
 import { UserModel } from "../Database/Models/User";
 import { User } from "../Database";
 
-export interface Request2 extends Request {
+export interface AuthenticatedRequest extends Request {
   user?: UserModel;
 }
 
-const auth = async function (req: Request2, res: Response, next: NextFunction) {
+const auth = async function (req: AuthenticatedRequest, res: Response, next: NextFunction) {
   try {
     const { userid: userId } = req.headers;
     const user = await User.findOne({
