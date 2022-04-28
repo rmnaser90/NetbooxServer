@@ -7,6 +7,8 @@ import { getUserBookInit } from "./Book/getUserBooks/getUserBooks";
 import { deleteUserBookInit } from "./Book/deleteUserBook/deleteUserBook";
 import { authenticatUserInit } from "./User/authenticateUser/authenticateUser";
 import { contactUsInit } from "./customerSupport/contactUs/contactUs";
+import slackEventLisetnerInit from "./Slack/EventListener";
+import slackVerifierInit from "./Slack/verifier";
 
 export const signIn = signInInit();
 export const signUp = signUpInit();
@@ -19,3 +21,6 @@ export const getUserBooks = getUserBookInit();
 export const deleteUserBooks = deleteUserBookInit();
 
 export const contactUs = contactUsInit();
+
+export const slackEventListener = slackEventLisetnerInit();
+export const slackVerifier = slackVerifierInit();

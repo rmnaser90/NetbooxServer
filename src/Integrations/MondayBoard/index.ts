@@ -51,7 +51,11 @@ export default class MondayBoard {
       console.log(error);
     }
   }
-  async addItems(contact: ContactUsForm, link: string) {
+  async addItems(
+    contact: ContactUsForm,
+    link: string,
+    item_name: string = "Contact Us"
+  ) {
     try {
       const { message, fullName, email, q } = contact;
 
@@ -71,7 +75,7 @@ export default class MondayBoard {
         query: `#graphql
           mutation ($columnVals: JSON!) {
                create_item ( board_id: 2584856094, 
-               item_name: "Netboox test"
+               item_name:"${item_name}"
             column_values:$columnVals ) { id }}`,
         variables,
       };
@@ -85,7 +89,7 @@ export default class MondayBoard {
           q,
           link,
           mondayId,
-          date:getDate()
+          date: getDate(),
         });
         return { data, dbMessage };
       }

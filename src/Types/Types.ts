@@ -93,3 +93,15 @@ export   interface ContactUsForm {
     q?:string
 }
 
+export interface SlackEvent {
+    client_msg_id: string,
+    type: string,
+    text: string,
+    user: string,
+    ts: string,
+    team: string,
+    blocks: [ { type: string, block_id: string, elements: [] } ],
+    channel: string,
+    event_ts: string,
+    channel_type: string
+  }
