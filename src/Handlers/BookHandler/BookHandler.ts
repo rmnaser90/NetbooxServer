@@ -1,15 +1,28 @@
-import { Book } from "../../Database/index";
+import { Book, Review } from "../../Database/index";
 import LocalBookType from "../../Types/LocalBookType";
 import { UserModel } from "../../Database/Models/User";
+import { User } from "../../Types/Types";
+import { BookModel } from "../../Database/Models/Book";
 
 class BookHandler {
   async addBook(book: LocalBookType) {
     try {
       const dbBook = await Book.upsert({ ...book });
-      
+
       return dbBook;
     } catch (error) {
       return error;
+    }
+  }
+  async addReview(book: BookModel, user: UserModel, text: string) {
+    try {
+      const review = await Review.create({ text });
+      const bookRes = await book.addReview(review);
+      const userRes = await user.addReview(review);
+
+      return { err: false, msg: "review added" };
+    } catch (error) {
+      return { err: true, msg: "something went wrong" };
     }
   }
   async addBulkBook(books: any[]) {

@@ -9,6 +9,7 @@ import {
 } from "sequelize";
 import bcrypt from "bcryptjs";
 import { BookModel } from "./Book";
+import { ReviewModel } from "./Review";
 
 export interface UserModel extends Model {
   readonly id?: number;
@@ -23,6 +24,7 @@ export interface UserModel extends Model {
   getBooks: HasManyGetAssociationsMixin<BookModel>;
   addBook: HasManyAddAssociationMixin<BookModel, number>;
   removeBook: HasManyRemoveAssociationMixin<BookModel, number>;
+  addReview: HasManyAddAssociationMixin<ReviewModel, number>;
 }
 
 export type UserStatic = typeof Model & {

@@ -9,6 +9,8 @@ import { authenticatUserInit } from "./User/authenticateUser/authenticateUser";
 import { contactUsInit } from "./customerSupport/contactUs/contactUs";
 import slackEventLisetnerInit from "./Slack/EventListener";
 import slackVerifierInit from "./Slack/verifier";
+import { getReviewsInit } from "./Book/getReviews/getReviews";
+import { addReviewInit } from "./Book/addReview/addReview";
 
 export const signIn = signInInit();
 export const signUp = signUpInit();
@@ -16,6 +18,8 @@ export const signOut = signOutInit();
 export const authenticatUser = authenticatUserInit();
 
 export const searchBook = searchBookInit();
+export const getReviews = getReviewsInit();
+export const addReview = addReviewInit();
 export const addToShelf = addToShelfInit();
 export const getUserBooks = getUserBookInit();
 export const deleteUserBooks = deleteUserBookInit();

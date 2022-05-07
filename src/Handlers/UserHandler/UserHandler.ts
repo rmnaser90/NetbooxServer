@@ -22,7 +22,7 @@ class UserController {
         },
         include: [{ model: Book }],
       });
-      
+
       if (!user) return Errors.INVALID_EMAIL;
       const isAuthenticated = authenticateUser(user, password);
       if (!isAuthenticated) return Errors.WRONG_PASSWORD;
@@ -45,7 +45,7 @@ class UserController {
         isLoggedIn,
       });
       await newUser.save();
-      return { err: false, user: newUser };
+      return { err: false, user: getUserInfo(newUser) };
     } catch ({ errors }) {
       return { ...Errors.BAD_REQUEST, error: errors };
     }

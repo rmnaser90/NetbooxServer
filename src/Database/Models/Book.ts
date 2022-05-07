@@ -1,4 +1,5 @@
-import { BuildOptions, DataTypes, Model, Sequelize } from "sequelize";
+import { BuildOptions, DataTypes, HasManyAddAssociationMixin, HasManyGetAssociationsMixin, Model, Sequelize } from "sequelize";
+import { ReviewModel } from "./Review";
 export interface BookModel extends Model {
   title?: string;
   subtitle?: string;
@@ -11,6 +12,8 @@ export interface BookModel extends Model {
   googleId?: string | number;
   category?: string;
   auther?: string;
+  addReview: HasManyAddAssociationMixin<ReviewModel,number>;
+  getReviews:HasManyGetAssociationsMixin<ReviewModel>
 }
 
 export type BookStatic = typeof Model & {
