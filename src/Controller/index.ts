@@ -11,6 +11,7 @@ import slackEventLisetnerInit from "./Slack/EventListener";
 import slackVerifierInit from "./Slack/verifier";
 import { getReviewsInit } from "./Book/getReviews/getReviews";
 import { addReviewInit } from "./Book/addReview/addReview";
+import { removeReviewInit } from "./Book/removeReview/removeReview";
 
 export const signIn = signInInit();
 export const signUp = signUpInit();
@@ -20,6 +21,7 @@ export const authenticatUser = authenticatUserInit();
 export const searchBook = searchBookInit();
 export const getReviews = getReviewsInit();
 export const addReview = addReviewInit();
+export const removeReview = removeReviewInit();
 export const addToShelf = addToShelfInit();
 export const getUserBooks = getUserBookInit();
 export const deleteUserBooks = deleteUserBookInit();

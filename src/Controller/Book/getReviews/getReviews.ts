@@ -13,7 +13,7 @@ export const getReviewsInit = () =>
           },
           order: [['createdAt', 'DESC']],
           attributes:["text","updatedAt","id"],
-          include:{model:User,attributes:["fullName"]},
+          include:{model:User,attributes:["fullName","id"]},
         });
 
         res.send(reviews || []);

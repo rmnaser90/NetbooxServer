@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { addReview, addToShelf, deleteUserBooks, getUserBooks } from "../../../Controller";
+import { addReview, addToShelf, deleteUserBooks, getUserBooks, removeReview } from "../../../Controller";
 import { Book, Review, User } from "../../../Database";
 
 const router: Router = express.Router();
@@ -26,6 +26,7 @@ const test = async function () {
 router.post("/addToShelf", addToShelf);
 router.get("/userBooks", getUserBooks);
 router.delete("/deleteUserBook", deleteUserBooks);
-router.get("/addReview", addReview);
+router.post("/addReview", addReview);
+router.delete("/removeReview", removeReview);
 
 export default { router };

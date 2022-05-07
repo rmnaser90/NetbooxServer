@@ -1,9 +1,11 @@
 import { BuildOptions, DataTypes, Model, Sequelize } from "sequelize";
+import { UserModel } from "./User";
 export interface ReviewModel extends Model {
   readonly id?: number;
   text?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  userId?:number;
 }
 
 export type ReviewStatic = typeof Model & {
