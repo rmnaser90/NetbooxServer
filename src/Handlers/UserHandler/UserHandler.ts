@@ -1,9 +1,7 @@
-import { Op, Model } from "sequelize";
-import { UserModel } from "../Database/Models/User";
-import { User, Book } from "../Database/index";
-import { BookModel } from "../Database/Models/Book";
+import { UserModel } from "../../Database/Models/User";
+import { User, Book } from "../../Database/index";
 import bcrypt from "bcryptjs";
-import Errors from "../Errors/Errors";
+import Errors from "../../Errors/Errors";
 
 export const authenticateUser = function (user: UserModel, password: string) {
   const hash = user.getDataValue("password");
@@ -24,14 +22,12 @@ class UserController {
         },
         include: [{ model: Book }],
       });
+      
       if (!user) return Errors.INVALID_EMAIL;
       const isAuthenticated = authenticateUser(user, password);
       if (!isAuthenticated) return Errors.WRONG_PASSWORD;
       user.set("isLoggedIn", true);
       await user.save();
-
-     
-
       return { err: false, user: getUserInfo(user) };
     } catch ({ errors }) {
       return { ...Errors.BAD_REQUEST, error: errors };

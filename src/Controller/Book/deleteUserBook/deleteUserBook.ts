@@ -1,8 +1,8 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../../../Authentication/auth";
-import BookController from "../../../Handlers/BookController";
+import BookHandler from "../../../Handlers/BookHandler/BookHandler";
 import Errors from "../../../Errors/Errors";
-const bookController = new BookController();
+const bookHandler = new BookHandler();
 
 export const deleteUserBookInit = () =>
 async function (req: AuthenticatedRequest, res: Response) {
@@ -10,7 +10,7 @@ async function (req: AuthenticatedRequest, res: Response) {
     const user = req.user;
     const { bookISBN } = req.body;
     if (user && bookISBN) {
-      const dbRes = await bookController.deleteUserBook(user, bookISBN);
+      const dbRes = await bookHandler.deleteUserBook(user, bookISBN);
       res.send(dbRes);
       return;
     }

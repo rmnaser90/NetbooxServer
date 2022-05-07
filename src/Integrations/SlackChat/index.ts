@@ -9,6 +9,7 @@ const googleSearch = new GoogleSearch();
 const mondayBoard = new MondayBoard();
 
 export default class SlackEvents {
+
   async eventHandler(event: SlackEvent) {
     if (event) {
       const { user, text } = event;
@@ -37,4 +38,5 @@ export default class SlackEvents {
       }
     }
   }
+  
 }

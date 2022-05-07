@@ -69,6 +69,8 @@ export type Params = {
     q: string
     maxResults?: number
     startIndex?: number
+    orderBy?:'relevance' | 'newest'
+    key?:string
 
 }
 

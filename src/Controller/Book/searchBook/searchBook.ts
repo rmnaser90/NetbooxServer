@@ -1,23 +1,24 @@
 import { Request, Response } from "express";
 import GoogleAPI from "../../../Integrations/GoogleBooks";
-import BookController from "../../../Handlers/BookController";
+import BookHandler from "../../../Handlers/BookHandler/BookHandler";
 
 import Errors from "../../../Errors/Errors";
 const googleApi = new GoogleAPI();
-const bookController = new BookController();
+const bookHandler = new BookHandler();
 
 export const searchBookInit = () =>
   async function (req: Request, res: Response) {
     try {
       const { q } = req.query;
       if (q) {
+        console.log(q);
         const books = await googleApi.searchBooks({ keyword: q.toString() });
-        await bookController.addBulkBook(books);
+        if (books) bookHandler.addBulkBook(books);
         res.send(books);
         return;
       }
-      res.status(400).send({ message: " cannot find" });
+      res.send({ err: true, message: " cannot find" });
     } catch (error) {
-      res.status(400).send(Errors.BAD_REQUEST);
+      res.send(Errors.BAD_REQUEST);
     }
   };

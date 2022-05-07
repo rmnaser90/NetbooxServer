@@ -1,15 +1,15 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../../../Authentication/auth";
-import BookController from "../../../Handlers/BookController";
+import BookHandler from "../../../Handlers/BookHandler/BookHandler";
 import Errors from "../../../Errors/Errors";
-const bookController = new BookController();
+const bookHandler = new BookHandler();
 
 export const getUserBookInit = () =>
   async function (req: AuthenticatedRequest, res: Response) {
     try {
       const user = req.user;
       if (user) {
-        const books = await bookController.getUserBooks(user);
+        const books = await bookHandler.getUserBooks(user);
         res.send(books);
       }
     } catch (error) {

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import UserController from "../../../Handlers/UserHandler";
+import UserController from "../../../Handlers/UserHandler/UserHandler";
 import { UserModel } from "../../../Database/Models/User";
 import Errors from "../../../Errors/Errors";
 const userController = new UserController();

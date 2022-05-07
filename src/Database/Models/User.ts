@@ -9,7 +9,6 @@ import {
 } from "sequelize";
 import bcrypt from "bcryptjs";
 import { BookModel } from "./Book";
-import { Book } from "..";
 
 export interface UserModel extends Model {
   readonly id?: number;

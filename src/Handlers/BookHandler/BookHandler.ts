@@ -1,14 +1,12 @@
-import { Op, Model } from "sequelize";
-import { BookModel } from "../Database/Models/Book";
-import { Book } from "../Database/index";
-import LocalBookType from "../Types/LocalBookType";
-import sequelize from "../Database/config";
-import { UserModel } from "../Database/Models/User";
+import { Book } from "../../Database/index";
+import LocalBookType from "../../Types/LocalBookType";
+import { UserModel } from "../../Database/Models/User";
 
-class BookController {
+class BookHandler {
   async addBook(book: LocalBookType) {
     try {
-      const dbBook = await Book.create({ ...book });
+      const dbBook = await Book.upsert({ ...book });
+      
       return dbBook;
     } catch (error) {
       return error;
@@ -66,4 +64,4 @@ class BookController {
   }
 }
 
-export default BookController;
+export default BookHandler;

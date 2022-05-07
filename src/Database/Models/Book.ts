@@ -63,7 +63,7 @@ const bookInit =  function (sequelize:Sequelize) {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    auther: {
+    author: {
       type: DataTypes.STRING,
       allowNull: true,
     },

@@ -4,12 +4,16 @@ import { Json } from "sequelize/types/utils";
 import { Message } from "../../Database";
 import { ContactUsForm } from "../../Types/Types";
 dotenv.config();
+const addZero = function (params:number) {
+  return params<=9?'0':''
+}
+
 const getDate = function () {
   const date = new Date(Date.now());
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${year}-0${month}-${day}`;
+  return `${year}-${addZero(month)}${month}-${addZero(day)}${day}`;
 };
 export default class MondayBoard {
   config: AxiosRequestConfig;
@@ -79,14 +83,12 @@ export default class MondayBoard {
             column_values:$columnVals ) { id }}`,
         variables,
       };
+
       const { data } = await axios({ ...this.config, data: query });
       const mondayId = data.data?.create_item?.id;
       if (mondayId) {
         const dbMessage = await Message.create({
-          message,
-          fullName,
-          email,
-          q,
+          ...contact,
           link,
           mondayId,
           date: getDate(),
@@ -95,6 +97,8 @@ export default class MondayBoard {
       }
       return { data };
     } catch (error) {
+      console.log(error);
+      
       return error;
     }
   }

@@ -1,6 +1,5 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../../../Authentication/auth";
-import BookController from "../../../Handlers/BookController";
 import Errors from "../../../Errors/Errors";
 import { ContactUsForm } from "../../../Types/Types";
 import GoogleSearch from "../../../Integrations/GoogleSearch";

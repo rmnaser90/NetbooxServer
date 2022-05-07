@@ -1,9 +1,9 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../../../Authentication/auth";
-import BookController from "../../../Handlers/BookController";
+import BookHandler from "../../../Handlers/BookHandler/BookHandler";
 import Errors from "../../../Errors/Errors";
 
-const bookController = new BookController();
+const bookHandler = new BookHandler();
 export const addToShelfInit = () =>
   async function (req: AuthenticatedRequest, res: Response) {
     try {
@@ -11,7 +11,7 @@ export const addToShelfInit = () =>
       const user = req.user;
 
       if (bookISBN && user) {
-        const dbRes = await bookController.addToShelf(user, bookISBN);
+        const dbRes = await bookHandler.addToShelf(user, bookISBN);
         res.send({ message: "saved ", dbRes });
         return;
       }
